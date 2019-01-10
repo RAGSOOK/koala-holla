@@ -74,7 +74,7 @@ function updateKoala() {
   const artistId = $(this).data('artistid');
   $.ajax({
     method: 'PUT',
-    url: `/koalas/${artistId}`
+    url: `/koalas/${koalaId}`
   }).then(function (response) {
     getArtistData();
   }).catch(function (error) {
