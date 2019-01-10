@@ -16,9 +16,8 @@ function setupClickListeners() {
     sweetDelete(koalaId);
   });
   $('#viewKoalas').on('click', '.ready-koala', updateKoala);
-  
-  
-}
+  $('#viewKoalas').on('click', '.color-koala', swapColor)
+};
 
 function getKoalas(){
   console.log( 'in getKoalas' );
@@ -32,7 +31,8 @@ function getKoalas(){
     for (let koala of listOfKoalas) {
       let transferHTML;
       if(koala.ready_to_transfer == true){
-        transferHTML = `${koala.ready_to_transfer}`;
+        transferHTML = `${koala.ready_to_transfer} <button class="color-koala" 
+                        data-koalaid="${koala.id}">Color</button>`;
       }else if(koala.ready_to_transfer == false){
         transferHTML = `${koala.ready_to_transfer} <button class="ready-koala" 
                         data-koalaid="${koala.id}">Prepare</button>`;
@@ -50,6 +50,7 @@ function getKoalas(){
                                         </td>
                                       </tr>`);
     }
+
 });
   
 } // end getKoalas
@@ -108,6 +109,10 @@ function updateKoala() {
   });
 
 }
+function swapColor() {
+  console.log(this)
+  $(this).parent().parent().toggleClass('yellowDiv');
+};
 
 function sweetDelete(deleteId){
   swal({
