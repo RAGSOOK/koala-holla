@@ -5,7 +5,7 @@ const pg = require('pg');
 const Pool = pg.Pool;
 // DB CONNECTION
 const pool = new Pool ({
-    database: 'koalas',
+    database: 'koala-holla',
     host: 'localhost',
     port: 5432,
     max: 10,
@@ -24,7 +24,12 @@ koalaRouter.get('/', (req, res) => {
     });
 });
 koalaRouter.put('/:id', (req, res) => {
+<<<<<<< HEAD
     const queryText = `UPDATE "koalas" SET "ready_to_transfer" = 'True' WHERE "id" = $1;`
+=======
+    const queryText = `UPDATE "koalas" SET "ready_to_transfer" = 'true' 
+    WHERE "id" = $1;`
+>>>>>>> 254efdd4e9e810fb014bc2043316ba74679ecb61
     pool.query(queryText, [req.params.id]).then((result) => {
         res.sendStatus(200);
 });
