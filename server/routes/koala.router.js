@@ -13,8 +13,8 @@ const pool = new Pool ({
 });
 
 // GET
-router.get('/', (req, res) => {
-    let queryText = `SELECT * FROM "koalas" ORDER BY "rating" DESC LIMIT 100;`;
+koalaRouter.get('/', (req, res) => {
+    let queryText = `SELECT * FROM "koalas" ORDER BY "name" DESC LIMIT 100;`;
     pool.query(queryText).then((result) => {
         //console.log(result);
         res.send(result.rows);
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
       res.send() 
     });
 });
-router.put('/transferY/:id', (req, res) => {
+koalaRouter.put('/transferY/:id', (req, res) => {
     const queryText = `UPDATE "koalas" SET "ready_to_transfer" = 'True' "WHERE "id" = $1;`
     pool.query(queryText, [req.params.id]).then((result) => {
         res.sendStatus(200);
