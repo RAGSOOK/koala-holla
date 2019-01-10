@@ -28,15 +28,12 @@ function getKoalas(){
     $('#viewKoalas').empty();
     for (let koala of listOfKoalas) {
       let transferHTML;
-      console.log(koala.ready_to_transfer);
       if(koala.ready_to_transfer == true){
         transferHTML = `${koala.ready_to_transfer}`;
       }else if(koala.ready_to_transfer == false){
         transferHTML = `${koala.ready_to_transfer} <button class="ready-koala" 
                         data-koalaid="${koala.id}">Prepare</button>`;
       }
-      console.log(transferHTML);
-      
         // Append each artist to the table
         $('#viewKoalas').append(`<tr>
                                         <td>${koala.name}</td>
@@ -72,6 +69,11 @@ function saveKoala(){
   }).then(function(response) {
       console.log(response);
       getKoalas();
+      $('#nameIn').val('');
+      $('#ageIn').val('');
+      $('#genderIn').val('');
+      $('#readyForTransferIn').val('');
+      $('#notesIn').val('');
   }).catch(function(error) {
     console.log(`Error in /koalas POST ${error}`);
   });
