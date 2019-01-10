@@ -18,9 +18,9 @@ function setupClickListeners() {
   $('#viewKoalas').on('click', '.ready-koala', updateKoala);
   //$('#viewKoalas').on('click', '.update-name', updateKoalaName);
   
-  
-}
   $('#viewKoalas').on('click', '.color-koala', swapColor)
+}
+
 
 
 function getKoalas(){
