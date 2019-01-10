@@ -5,7 +5,7 @@ const pg = require('pg');
 const Pool = pg.Pool;
 // DB CONNECTION
 const pool = new Pool ({
-    database: 'koalas',
+    database: 'koala-holla',
     host: 'localhost',
     port: 5432,
     max: 10,
