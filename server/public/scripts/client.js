@@ -18,10 +18,8 @@ function setupClickListeners() {
   $('#viewKoalas').on('click', '.ready-koala', updateKoala);
   //$('#viewKoalas').on('click', '.update-name', updateKoalaName);
   
-  
-}
   $('#viewKoalas').on('click', '.color-koala', swapColor)
-
+}
 
 function getKoalas(){
   console.log( 'in getKoalas' );
@@ -37,6 +35,7 @@ function getKoalas(){
       if(koala.ready_to_transfer == true){
         transferHTML = `${koala.ready_to_transfer} <button class="color-koala" 
                         data-koalaid="${koala.id}">Color</button>`;
+                        displayColor();
       }else if(koala.ready_to_transfer == false){
         transferHTML = `${koala.ready_to_transfer} <button class="ready-koala" 
                         data-koalaid="${koala.id}">Prepare</button>
@@ -49,7 +48,7 @@ function getKoalas(){
                                         <td>${koala.name}</td>
                                         <td>${koala.age}</td>
                                         <td>${koala.gender}</td>
-                                        <td>${transferHTML}</td>
+                                        <td id="veggie">${transferHTML}</td>
                                         <td>${koala.notes}</td>
                                         <td>
                                             <button class="delete-koala" 
@@ -61,6 +60,12 @@ function getKoalas(){
 });
   
 } // end getKoalas
+
+function displayColor(){
+
+  $('#veggie').parent().css('background-color', 'green');
+
+}
 
 function saveKoala(){
   // ajax call to server to get koalas
