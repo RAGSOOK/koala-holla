@@ -11,7 +11,10 @@ $( document ).ready( function(){
 
 function setupClickListeners() {
   $( '#addButton' ).on( 'click', saveKoala); 
-  $('#viewKoalas').on('click', '.delete-koala', deleteKoala);
+  $('#viewKoalas').on('click', '.delete-koala', function(){
+    const koalaId = $(this).data('koalaid');
+    sweetDelete(koalaId);
+  });
   $('#viewKoalas').on('click', '.ready-koala', updateKoala);
   
   
@@ -74,9 +77,8 @@ function saveKoala(){
   });
 }
 
-function deleteKoala(){
-  console.log($(this).data('koalaid'));
-  const koalaId = $(this).data('koalaid');
+function deleteKoala(koalaId){
+
   $.ajax({
     method: 'DELETE',
     url: `/koalas/${koalaId}`
@@ -100,4 +102,24 @@ function updateKoala() {
     console.log('this is error', error);
   });
 
+}
+
+function sweetDelete(deleteId){
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this koala!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      deleteKoala(deleteId);
+      swal("The koala has been permanently removed!", {
+        icon: "success",
+      });
+    } else {
+      swal("Delete cancelled!");
+    }
+  });
 }
