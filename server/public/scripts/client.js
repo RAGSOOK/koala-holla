@@ -28,15 +28,15 @@ function getKoalas(){
     $('#viewKoalas').empty();
     for (let koala of listOfKoalas) {
       let transferHTML;
-      if(koala.transfer == 'Y'){
+      if(koala.transfer == TRUE){
         transferHTML = `${koala.transfer}`;
-      }else if(koala.transfer == 'N'){
+      }else if(koala.transfer == FALSE){
         transferHTML = `${koala.transfer} <button class="ready-koala" 
                         data-koalaid="${koala.id}">Prepare</button>`
       }
       
         // Append each artist to the table
-        $('#songTableBody').append(`<tr>
+        $('#viewKoalas').append(`<tr>
                                         <td>${koala.name}</td>
                                         <td>${koala.age}</td>
                                         <td>${koala.gender}</td>
