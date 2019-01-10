@@ -36,7 +36,7 @@ function getKoalas(){
       }
       
         // Append each artist to the table
-        $('#songTableBody').append(`<tr>
+        $('#viewKoalas').append(`<tr>
                                         <td>${koala.name}</td>
                                         <td>${koala.age}</td>
                                         <td>${koala.gender}</td>
