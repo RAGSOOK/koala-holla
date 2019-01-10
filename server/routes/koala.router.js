@@ -14,7 +14,7 @@ const pool = new Pool ({
 
 // GET
 koalaRouter.get('/', (req, res) => {
-    let queryText = `SELECT * FROM "koalas" ORDER BY "" DESC LIMIT 100;`;
+    let queryText = `SELECT * FROM "koalas" ORDER BY "name" DESC LIMIT 100;`;
     pool.query(queryText).then((result) => {
         //console.log(result);
         res.send(result.rows);
