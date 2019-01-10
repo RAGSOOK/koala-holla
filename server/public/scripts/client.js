@@ -13,6 +13,7 @@ function setupClickListeners() {
   $( '#addButton' ).on( 'click', saveKoala); 
   $('#viewKoalas').on('click', '.delete-koala', deleteKoala);
   $('#viewKoalas').on('click', '.ready-koala', updateKoala);
+  //$('#viewKoalas').on('click', '.update-name', updateKoalaName);
   
   
 }
@@ -32,7 +33,10 @@ function getKoalas(){
         transferHTML = `${koala.ready_to_transfer}`;
       }else if(koala.ready_to_transfer == false){
         transferHTML = `${koala.ready_to_transfer} <button class="ready-koala" 
-                        data-koalaid="${koala.id}">Prepare</button>`;
+                        data-koalaid="${koala.id}">Prepare</button>
+                       <button class"update-name" 
+                        data-koalaid="${koala.id}">Change Name</button>
+                        `;
       }
         // Append each artist to the table
         $('#viewKoalas').append(`<tr>
@@ -106,3 +110,18 @@ function updateKoala() {
   });
 
 }
+
+// function updateKoalaName(){
+//   console.log('this is update name');
+//   // const koalaId = $(this).data('koalaid');
+//   // $.ajax({
+//   //   method: 'PUT',
+//   //   url: `/koalas/name${koalaId}`
+//   // }).then(function (response) {
+//   //   getKoalas();
+//   // }).catch(function (error) {
+//   //   console.log('this is error', error);
+//   // });
+
+// }
+
