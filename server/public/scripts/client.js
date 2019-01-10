@@ -11,12 +11,17 @@ $( document ).ready( function(){
 
 function setupClickListeners() {
   $( '#addButton' ).on( 'click', saveKoala); 
-  $('#viewKoalas').on('click', '.delete-koala', deleteKoala);
+  $('#viewKoalas').on('click', '.delete-koala', function(){
+    const koalaId = $(this).data('koalaid');
+    sweetDelete(koalaId);
+  });
   $('#viewKoalas').on('click', '.ready-koala', updateKoala);
   //$('#viewKoalas').on('click', '.update-name', updateKoalaName);
   
   
 }
+  $('#viewKoalas').on('click', '.color-koala', swapColor)
+};
 
 function getKoalas(){
   console.log( 'in getKoalas' );
@@ -30,7 +35,8 @@ function getKoalas(){
     for (let koala of listOfKoalas) {
       let transferHTML;
       if(koala.ready_to_transfer == true){
-        transferHTML = `${koala.ready_to_transfer}`;
+        transferHTML = `${koala.ready_to_transfer} <button class="color-koala" 
+                        data-koalaid="${koala.id}">Color</button>`;
       }else if(koala.ready_to_transfer == false){
         transferHTML = `${koala.ready_to_transfer} <button class="ready-koala" 
                         data-koalaid="${koala.id}">Prepare</button>
@@ -51,6 +57,7 @@ function getKoalas(){
                                         </td>
                                       </tr>`);
     }
+
 });
   
 } // end getKoalas
@@ -83,9 +90,8 @@ function saveKoala(){
   });
 }
 
-function deleteKoala(){
-  console.log($(this).data('koalaid'));
-  const koalaId = $(this).data('koalaid');
+function deleteKoala(koalaId){
+
   $.ajax({
     method: 'DELETE',
     url: `/koalas/${koalaId}`
@@ -125,3 +131,27 @@ function updateKoala() {
 
 // }
 
+function swapColor() {
+  console.log(this)
+  $(this).parent().parent().toggleClass('yellowDiv');
+};
+
+function sweetDelete(deleteId){
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this koala!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      deleteKoala(deleteId);
+      swal("The koala has been permanently removed!", {
+        icon: "success",
+      });
+    } else {
+      swal("Delete cancelled!");
+    }
+  });
+}
