@@ -82,7 +82,7 @@ function deleteKoala(){
   const koalaId = $(this).data('koalaid');
   $.ajax({
     method: 'DELETE',
-    url: `/koalas / ${koalaId}`
+    url: `/koalas/${koalaId}`
   }).then(function(response){
     getKoalas();
   }).catch(function(error){
@@ -93,7 +93,7 @@ function deleteKoala(){
 }
 
 function updateKoala() {
-  const koalaId = $(this).data('artistid');
+  const koalaId = $(this).data('koalaid');
   $.ajax({
     method: 'PUT',
     url: `/koalas/${koalaId}`
