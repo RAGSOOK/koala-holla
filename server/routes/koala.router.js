@@ -31,7 +31,7 @@ koalaRouter.put('/transferY/:id', (req, res) => {
 });
 
 // POST
-router.post('/', (req, res) => {
+koalaRouter.post('/', (req, res) => {
     console.log(`In /koalas POST with`, req.body);
     const koalaNew = req.body;
     const queryText = `INSERT INTO "koalas" ("name", "gender", "age", "ready_to_transfer", "notes")
