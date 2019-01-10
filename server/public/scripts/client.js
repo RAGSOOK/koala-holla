@@ -58,9 +58,9 @@ function saveKoala(){
 
   const koalaToSend = {name: $('#nameIn').val(), 
                        age: $('#ageIn').val(),
-                       gender: $('#genderIn'),
-                       readyToTransfer: $('#readyForTransferIn'),
-                       notes: $('#notesIn')
+                       gender: $('#genderIn').val(),
+                       readyToTransfer: $('#readyForTransferIn').val(),
+                       notes: $('#notesIn').val()
                       };
   console.log(koalaToSend);
   $.ajax({
