@@ -32,7 +32,7 @@ function getKoalas(){
     for (let koala of listOfKoalas) {
       let transferHTML;
       if(koala.ready_to_transfer == true){
-        transferHTML = `${koala.ready_to_transfer}`;
+        transferHTML = `${koala.ready_to_transfer}`;  
       }else if(koala.ready_to_transfer == false){
         transferHTML = `${koala.ready_to_transfer} <button class="ready-koala" 
                         data-koalaid="${koala.id}">Prepare</button>`;
