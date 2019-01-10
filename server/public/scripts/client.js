@@ -21,6 +21,8 @@ function setupClickListeners() {
   $('#viewKoalas').on('click', '.color-koala', swapColor)
 }
 
+
+
 function getKoalas(){
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
@@ -39,8 +41,6 @@ function getKoalas(){
       }else if(koala.ready_to_transfer == false){
         transferHTML = `${koala.ready_to_transfer} <button class="ready-koala" 
                         data-koalaid="${koala.id}">Prepare</button>
-                       <button class"update-name" 
-                        data-koalaid="${koala.id}">Change Name</button>
                         `;
       }
         // Append each artist to the table
@@ -122,19 +122,6 @@ function updateKoala() {
 
 }
 
-// function updateKoalaName(){
-//   console.log('this is update name');
-//   // const koalaId = $(this).data('koalaid');
-//   // $.ajax({
-//   //   method: 'PUT',
-//   //   url: `/koalas/name${koalaId}`
-//   // }).then(function (response) {
-//   //   getKoalas();
-//   // }).catch(function (error) {
-//   //   console.log('this is error', error);
-//   // });
-
-// }
 
 function swapColor() {
   console.log(this)
