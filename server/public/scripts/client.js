@@ -61,7 +61,7 @@ function deleteKoala(){
   $.ajax({
     method: 'DELETE',
     url: `/koalas / ${koalaId}`
-  }).then((function(response)=>{
+  }).then(function(response){
     getKoalas();
   }).catch(function(error){
     alert('Delete error');
@@ -70,4 +70,15 @@ function deleteKoala(){
 
 }
 
+function updateKoala() {
+  const artistId = $(this).data('artistid');
+  $.ajax({
+    method: 'PUT',
+    url: `/koalas/${artistId}`
+  }).then(function (response) {
+    getArtistData();
+  }).catch(function (error) {
+    console.log('this is error', error);
+  });
 
+}
