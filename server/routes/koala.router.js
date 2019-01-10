@@ -14,7 +14,7 @@ const pool = new Pool ({
 
 // GET
 koalaRouter.get('/', (req, res) => {
-    let queryText = `SELECT * FROM "koalas" ORDER BY "rating" DESC LIMIT 100;`;
+    let queryText = `SELECT * FROM "koalas" ORDER BY "" DESC LIMIT 100;`;
     pool.query(queryText).then((result) => {
         //console.log(result);
         res.send(result.rows);
@@ -31,10 +31,22 @@ koalaRouter.put('/transferY/:id', (req, res) => {
 });
 
 // POST
-
+router.post('/', (req, res) => {
+    console.log(`In /koalas POST with`, req.body);
+    const koalaNew = req.body;
+    const queryText = `INSERT INTO "koalas" ("name", "gender", "age", "ready_to_transfer", "notes")
+                       VALUES ($1, $2, $3, $4, $5);`;
+    pool.query(queryText, [koalaNew.name, koalaNew.gender, koalaNew.age, koalaNew.ready_to_transfer, koalaNew.notes])
+        .then((responseFromDatabase) => {
+            //console.log(responseFromDatabase);
+            res.sendStatus(201);
+        }).catch((error) => {
+            console.log(`Error in POST /artist ${error}`);
+            res.sendStatus(500);
+        });
 
 // PUT
-
+    });
 
 // DELETE
 
