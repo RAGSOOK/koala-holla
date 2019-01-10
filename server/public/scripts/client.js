@@ -72,6 +72,11 @@ function saveKoala(){
   }).then(function(response) {
       console.log(response);
       getKoalas();
+      $('#nameIn').val('');
+      $('#ageIn').val('');
+      $('#genderIn').val('');
+      $('#readyForTransferIn').val('');
+      $('#notesIn').val('');
   }).catch(function(error) {
     console.log(`Error in /koalas POST ${error}`);
   });
