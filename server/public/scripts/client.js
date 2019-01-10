@@ -28,9 +28,9 @@ function getKoalas(){
     $('#viewKoalas').empty();
     for (let koala of listOfKoalas) {
       let transferHTML;
-      if(koala.transfer == 'Y'){
+      if(koala.transfer == TRUE){
         transferHTML = `${koala.transfer}`;
-      }else if(koala.transfer == 'N'){
+      }else if(koala.transfer == FALSE){
         transferHTML = `${koala.transfer} <button class="ready-koala" 
                         data-koalaid="${koala.id}">Prepare</button>`
       }
