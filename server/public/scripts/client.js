@@ -22,36 +22,55 @@ function setupClickListeners() {
 
 function searchKoalas(){
   let term = $('#searchIn').val();
-  $.ajax({
-    method: 'GET',
-    url: `/koalas/search?search=${term}`
-  }).then(function(response) {
-    const listOfKoalas = response;
-    $('#viewKoalas').empty();
-    for (let koala of listOfKoalas) {
-      let transferHTML;
-      if(koala.ready_to_transfer == true){
-        transferHTML = `${koala.ready_to_transfer}`;
-      }else if(koala.ready_to_transfer == false){
-        transferHTML = `${koala.ready_to_transfer} <button class="ready-koala" 
-                        data-koalaid="${koala.id}">Prepare</button>`;
-      }
-        // Append each artist to the table
-        $('#viewKoalas').append(`<tr>
-                                        <td>${koala.name}</td>
-                                        <td>${koala.age}</td>
-                                        <td>${koala.gender}</td>
-                                        <td>${transferHTML}</td>
-                                        <td>${koala.notes}</td>
-                                        <td>
-                                            <button class="delete-koala" 
-                                                    data-koalaid="${koala.id}">Delete</button>
-                                        </td>
-                                      </tr>`);
-    }
-  }).catch((error) => {
-    console.log('Error is searchKoalas',error);
+  // $.ajax({
+  //   method: 'GET',
+  //   url: `/koalas/search?search=${term}`
+  // }).then(function(response) {
+  //   const listOfKoalas = response;
+  //   $('#viewKoalas').empty();
+  //   for (let koala of listOfKoalas) {
+  //     let transferHTML;
+  //     if(koala.ready_to_transfer == true){
+  //       transferHTML = `${koala.ready_to_transfer}`;
+  //     }else if(koala.ready_to_transfer == false){
+  //       transferHTML = `${koala.ready_to_transfer} <button class="ready-koala" 
+  //                       data-koalaid="${koala.id}">Prepare</button>`;
+  //     }
+  //       // Append each artist to the table
+  //       $('#viewKoalas').append(`<tr>
+  //                                       <td>${koala.name}</td>
+  //                                       <td>${koala.age}</td>
+  //                                       <td>${koala.gender}</td>
+  //                                       <td>${transferHTML}</td>
+  //                                       <td>${koala.notes}</td>
+  //                                       <td>
+  //                                           <button class="delete-koala" 
+  //                                                   data-koalaid="${koala.id}">Delete</button>
+  //                                       </td>
+  //                                     </tr>`);
+  //   }
+  // }).catch((error) => {
+  //   console.log('Error is searchKoalas',error);
+  // });
+
+  let saved = [];
+  //each row
+  $('#viewKoalas tr').each(function(){
+    //each column
+    $(this).find('td').each(function(){
+      console.log($(this));
+        if( $(this) == `*${term}*`){
+          console.log($(this));
+          saved.push($(this).parent());
+        }
+    });
   });
+
+  console.log(saved);
+  $('#viewKoalas').empty();
+  for(row of saved){
+    $('#viewKoalas').append(row);
+  }
 }
 
 function getKoalas(){
