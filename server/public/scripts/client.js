@@ -11,6 +11,9 @@ $( document ).ready( function(){
 
 function setupClickListeners() {
   $( '#addButton' ).on( 'click', saveKoala); 
+  $('#viewKoalas').on('click', '.delete-koala', deleteKoala);
+  $('#viewKoalas').on('click', '.ready-koala', updateKoala);
+  
   
 }
 
