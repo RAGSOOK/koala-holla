@@ -11,6 +11,9 @@ $( document ).ready( function(){
 
 function setupClickListeners() {
   $( '#addButton' ).on( 'click', saveKoala); 
+  $('#viewKoalas').on('click', '.delete-koala', deleteKoala);
+  $('#viewKoalas').on('click', '.ready-koala', updateKoala);
+  
   
 }
 
@@ -91,7 +94,7 @@ function updateKoala() {
   const artistId = $(this).data('artistid');
   $.ajax({
     method: 'PUT',
-    url: `/koalas/${artistId}`
+    url: `/koalas/${koalaId}`
   }).then(function (response) {
     getArtistData();
   }).catch(function (error) {
