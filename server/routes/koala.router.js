@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
     const koalaNew = req.body;
     const queryText = `INSERT INTO "koalas" ("name", "gender", "age", "ready_to_transfer", "notes")
                        VALUES ($1, $2, $3, $4, $5);`;
-    pool.query(queryText, [koalaNew.name, koalaNew.gender, koalaNew.age, koalaNew.ready_to_transfer, koalaNew.notes])
+    pool.query(queryText, [koalaNew.name, koalaNew.gender, koalaNew.age, koalaNew.readyToTransfer, koalaNew.notes])
         .then((responseFromDatabase) => {
             //console.log(responseFromDatabase);
             res.sendStatus(201);
