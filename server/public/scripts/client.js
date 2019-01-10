@@ -51,8 +51,25 @@ function getKoalas(){
 
 function saveKoala(){
   // ajax call to server to get koalas
+  console.log('In function sendKoalaToServer');
 
- 
+  const koalaToSend = {name: $('#nameIn').val(), 
+                       age: $('#ageIn').val(),
+                       gender: $('#genderIn'),
+                       readyToTransfer: $('#readyForTransferIn'),
+                       notes: $('#notesIn')
+                      };
+  console.log(koalaToSend);
+  $.ajax({
+      method: 'POST',
+      url: '/koalas',
+      data: koalaToSend
+  }).then(function(response) {
+      console.log(response);
+      getKoalas();
+  }).catch(function(error) {
+    console.log(`Error in /koalas POST ${error}`);
+  });
 }
 
 function deleteKoala(){
@@ -61,7 +78,7 @@ function deleteKoala(){
   $.ajax({
     method: 'DELETE',
     url: `/koalas / ${koalaId}`
-  }).then((function(response)=>{
+  }).then(function(response){
     getKoalas();
   }).catch(function(error){
     alert('Delete error');
