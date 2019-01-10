@@ -17,7 +17,41 @@ function setupClickListeners() {
   });
   $('#viewKoalas').on('click', '.ready-koala', updateKoala);
   
-  
+  $('#searchButton').on('click', searchKoalas);
+}
+
+function searchKoalas(){
+  let term = $('#searchIn').val();
+  $.ajax({
+    method: 'GET',
+    url: `/koalas/search?search=${term}`
+  }).then(function(response) {
+    const listOfKoalas = response;
+    $('#viewKoalas').empty();
+    for (let koala of listOfKoalas) {
+      let transferHTML;
+      if(koala.ready_to_transfer == true){
+        transferHTML = `${koala.ready_to_transfer}`;
+      }else if(koala.ready_to_transfer == false){
+        transferHTML = `${koala.ready_to_transfer} <button class="ready-koala" 
+                        data-koalaid="${koala.id}">Prepare</button>`;
+      }
+        // Append each artist to the table
+        $('#viewKoalas').append(`<tr>
+                                        <td>${koala.name}</td>
+                                        <td>${koala.age}</td>
+                                        <td>${koala.gender}</td>
+                                        <td>${transferHTML}</td>
+                                        <td>${koala.notes}</td>
+                                        <td>
+                                            <button class="delete-koala" 
+                                                    data-koalaid="${koala.id}">Delete</button>
+                                        </td>
+                                      </tr>`);
+    }
+  }).catch((error) => {
+    console.log('Error is searchKoalas',error);
+  });
 }
 
 function getKoalas(){

@@ -23,6 +23,23 @@ koalaRouter.get('/', (req, res) => {
       res.send() 
     });
 });
+
+koalaRouter.get('/search', (req, res) => {
+    if(req.query.search){
+        term = `%${req.query.search}%`;
+        queryText = `SELECT * FROM "koalas" WHERE "name" ILIKE $1 
+                     OR "notes" ILIKE $1;`;
+        pool.query(queryText, [term]).then((result) => {
+            res.send(result.rows);
+        }).catch((error) => {
+            console.log('Error in GET /koalas/search', error);
+            res.sendStatus(500);
+        });
+    }else{
+        console.log('No search term passed');
+    }
+});
+
 koalaRouter.put('/:id', (req, res) => {
     const queryText = `UPDATE "koalas" SET "ready_to_transfer" = 'true' 
     WHERE "id" = $1;`
